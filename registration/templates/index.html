@@ -56,6 +56,8 @@
                             {%else%}
                                 <ul class="dropdown-menu">
                                 <li><a href=" {% url 'logout' %}">sign out</a></li>
+
+
                             {%endif%}
 
                         </ul>
@@ -67,58 +69,30 @@
 
 
 
-
 </head>
 <title>WELCOME</title>
 <body background="{%  static 'background2.jpeg' %}">
 
+    {% if user.is_anonymous %}
+        NOTHING HERE :(
+    {% else%}
+        <div class="col-md-6 col-md-offset-5" style="padding-top: 10">
+            <a href="{% url 'add_chocolate' %}">
+            <button type="button" class="btn btn-warning">ADD CHOCLATE</button></a>
+        </div>
+    {%endif%}
 
 
 
 
 
 
-<!IMAGE!>
-<div class="col-md-3 col-md-offset-1">
-    <img src="{%  static 'computer.jpg' %}" alt="{%  static 'computer.jpg' %}" class="img-circle">
-</div>
 <div class="col-md-6 col-md-offset-4">
     <p></p>
     <p></p>
 
 
-    <div class="col-md-6 col-md-offset-4">
-        <p></p>
-        <p></p>
-        <!FORM!>
-        <form class="form-horizontal">
-            <div class="form-group">
-                <label for="inputEmail3" class="col-sm-4 control-label">Email</label>
-                <div class="col-sm-8">
-                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="inputPassword3" class="col-sm-4 control-label">Password</label>
-                <div class="col-sm-8">
-                    <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-4 col-sm-2.5">
-                    <div class="checkbox">
-                        <label>
-                            <input type="checkbox"> Remember me
-                        </label>
-                    </div>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-4 col-sm-12.5">
-                    <button type="submit" class="btn btn-primary">Sign in</button>
-                </div>
-            </div>
-        </form>
+
         <script type="text/javascript" src="{% static 'js/jquery.js' %}"></script>
         <script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
         <script type="text/javascript">
@@ -126,5 +100,32 @@
                 $('.dropdown-toggle').dropdown();
             });
         </script>
+
+    <table class="table table-condensed">
+ <thead>
+ <tr>
+     <td style="color: white">
+         <b>Name</b>
+     </td>
+ <td style="color: white">
+     <b>Description</b>
+ </td>
+ <td style="color: white">
+     <b>Price</b>
+ </td>
+ </tr>
+ <tbody>
+<tr>
+  {{  object_list }}
+{%  for item in object_list %}
+   <tr>
+   <a style="color:#ffffff">
+  <td style="color: white">  Name : {{ item.name}}</td>
+   <td style="color: white">Description : {{  item.description }}</td>
+   <td style="color: white">Price : {{  item.price }}</td>
+   </tr>
+{% endfor %}
+
+
 </body>
 </html>

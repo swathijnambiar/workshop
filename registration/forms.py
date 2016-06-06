@@ -13,16 +13,16 @@ user_widgets = {
     'user_last_name': forms.TextInput(attrs={'placeholder':_('Last Name'),
                                              'required': True}),
     'email': forms.TextInput(attrs={'placeholder':_('Your Email address'),
-                                             'required': True}),
+                                    'required': True}),
     'username': forms.TextInput(attrs={'placeholder':_('Username'),
-                                             'required': True}),
+                                       'required': True}),
 }
 
 user_extra_widgets = {
     'user_github'    : forms.TextInput(attrs={'placeholder':_('Github profile'), 'required': False}),
     'user_linkedin'  : forms.TextInput(attrs={'placeholder':_('Linkedin profile'), 'required': False}),
     'user_bio'    :  forms.Textarea(attrs={'placeholder':_('Short bio about yourself'),
-                                            'rows':4, 'cols':15, 'required': False}),
+                                           'rows':4, 'cols':15, 'required': False}),
     'user_occupation'    : forms.TextInput(attrs={'placeholder':_('Your occupation'), 'required': False}),
     'user_nationality'    : forms.TextInput(attrs={'placeholder':_('Your Nationality'), 'required': False}),
 }
@@ -35,7 +35,7 @@ user_fields = [ 'email', 'username' ]
 
 class UserRegistrationForm(ModelForm):
     repass = forms.CharField(widget=forms.PasswordInput(attrs={'placeholder':'Re Enter Password',
-                                                     'min_length':1, 'max_length':20}))
+                                                               'min_length':1, 'max_length':20}))
 
     class Meta:
         model = User
@@ -72,3 +72,30 @@ class UserRegistrationForm(ModelForm):
         user.set_password(self.cleaned_data["password"])
         if commit: user.save()
         return user
+
+
+chocolate_widgets = {
+    'chocolate_first_name': forms.TextInput(attrs={'placeholder': _('First Name'), 'required': True}),
+    'user_last_name': forms.TextInput(attrs={'placeholder': _('Last Name'),
+                                             'required': True}),
+
+    'chocolate_manufacture': forms.TextInput(attrs={'placeholder': _('Manufacture'), 'required': True}),
+    'chocolate_description': forms.TextInput(attrs={'placeholder': _('Description'),
+                                                    'required': True}),
+    'chocolate_price': forms.TextInput(attrs={'placeholder': _('price'),
+                                              'required': True}),
+}
+
+
+chocolate_fields = [ 'name','description','manufacturer','price' ]
+
+class AddChocolateForm(ModelForm):
+    class Meta:
+        model = Chocolate
+        fields = chocolate_fields
+        widgets = chocolate_widgets
+
+
+
+
+
